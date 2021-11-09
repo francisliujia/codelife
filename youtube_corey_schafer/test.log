@@ -1,0 +1,32 @@
+2021-10-30 14:24:01,733:INFO:Add: 20 + 10 = 30
+2021-10-30 14:24:01,733:INFO:Sub: 20 - 10 = 10
+2021-10-30 14:24:01,733:INFO:Mul: 20 * 10 = 200
+2021-10-30 14:24:01,733:INFO:Div: 20 / 10 = 2
+2021-10-30 14:27:09,010:DEBUG:Add: 20 + 10 = 30
+2021-10-30 14:27:09,010:DEBUG:Sub: 20 - 10 = 10
+2021-10-30 14:27:09,010:DEBUG:Mul: 20 * 10 = 200
+2021-10-30 14:27:09,011:DEBUG:Div: 20 / 10 = 2
+2021-10-30 14:29:11,623:DEBUG:Add: 20 + 10 = 30
+2021-10-30 14:29:11,623:DEBUG:Sub: 20 - 10 = 10
+2021-10-30 14:29:11,623:DEBUG:Mul: 20 * 10 = 200
+2021-10-30 14:29:11,623:DEBUG:Div: 20 / 10 = 2
+2021-10-30 14:29:28,695:DEBUG:Add: 20 + 10 = 30
+2021-10-30 14:29:28,695:DEBUG:Sub: 20 - 10 = 10
+2021-10-30 14:29:28,696:DEBUG:Mul: 20 * 10 = 200
+2021-10-30 14:29:28,696:DEBUG:Div: 20 / 10 = 2.0
+2021-10-30 14:33:51,214:ERROR:tried to devide by zero
+2021-10-30 14:34:43,400:ERROR:tried to devide by zero
+Traceback (most recent call last):
+  File "/Users/ji-axinliu/Downloads/python_programming/youtube_corey_schafer/logging_basics.py", line 40, in divide
+    result = x / y
+ZeroDivisionError: division by zero
+2021-10-30 14:36:33,605:ERROR:tried to devide by zero
+Traceback (most recent call last):
+  File "/Users/ji-axinliu/Downloads/python_programming/youtube_corey_schafer/logging_basics.py", line 45, in divide
+    result = x / y
+ZeroDivisionError: division by zero
+2021-10-30 14:37:32,156:ERROR:tried to devide by zero
+Traceback (most recent call last):
+  File "/Users/ji-axinliu/Downloads/python_programming/youtube_corey_schafer/logging_basics.py", line 46, in divide
+    result = x / y
+ZeroDivisionError: division by zero
