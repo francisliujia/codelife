@@ -1,11 +1,19 @@
 # francisliujia.github.io
 
-[1] Python_learning_codes 
+[applications]
+ -- Games and simple applications I created with Python.
 
--- This folder contains the codes I have writen when learning Python.
+[projects]
+ -- Relatively large applications I created with Python. 
 
-[2] create_games
+[textbooks]
+ -- Python codes I have writen while reading textbooks.
 
--- This folder contains the computer games i have created in Python.
+[videos]
+ -- Python codes I have writen while watching video courses on YouTube.
+
+
+
+
 
 
