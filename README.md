@@ -3,6 +3,12 @@
 [applications]
  -- Games and simple applications I created with Python.
 
+[cs50 projects]
+ -- course work 
+
+[games_and_applications]
+ -- simple games and programs I have created. 
+
 [projects]
  -- Relatively large applications I created with Python. 
 
