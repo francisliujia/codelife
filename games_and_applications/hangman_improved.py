@@ -67,20 +67,12 @@ HANGMAN = ['''
     =====''']
 
 
-# word_list = '''ant bloon bat bear beaver bager camel cat cobra cougar
-# 			coyote crow dog donky eagel duck ferret fox frog goat goose hawk
-# 			lion lizard llama mole monkey moose mouse mule newt otter owl panda
-# 			parrot pigeon rabbit ram raven rhino salmon seal shark sheep
-# 			sjunk sloth snake spider stork swan tiger toad trout turkey turtle
-# 			weasel whale wolf wombat zebra
-# 		'''.split()
-
 word_list ={
-						'Colors':'red orange yellow green blue indigo violet white black brown'.split(),
-						'Shapes': 'square triangle rectangle circle ellipse rhombus trapezoid chevron pentagon hexagon septagon octagon'.split(),
-						'Fruit': 'apple orange lemon lime pear watermelon grape grapefruit cherry banana cantaloup mango strawberry tomato'.split(),
-						'Animal': 'bat bear beaver cat cougar crab dear dog donkey duck eagle fish frog goat leech lion lizard monkey moose otter owl panda python rabbit rat shark sheep skunk squid tpger turkey turtle weasel whale wolf wombat zebra'.split()
-						}
+		'Colors':'red orange yellow green blue indigo violet white black brown'.split(),
+		'Shapes': 'square triangle rectangle circle ellipse rhombus trapezoid chevron pentagon hexagon septagon octagon'.split(),
+		'Fruit': 'apple orange lemon lime pear watermelon grape grapefruit cherry banana cantaloup mango strawberry tomato'.split(),
+		'Animal': 'bat bear beaver cat cougar crab dear dog donkey duck eagle fish frog goat leech lion lizard monkey moose otter owl panda python rabbit rat shark sheep skunk squid tpger turkey turtle weasel whale wolf wombat zebra'.split()
+		}
 
 
 def intro():
@@ -137,56 +129,34 @@ def play_again():
 	return input().lower().startswith('y')
 
 
-def pick_level():
-	difficult_level = ''
-	while difficult_level not in 'EMH':
-		print('Which level do you want to play?\n(Choice: E: Easy, M: Medium, H: Hard)')
-		difficult_level = input().upper()
-
-	if difficult_level == 'M':
-		del HANGMAN[1]
-		del HANGMAN[2]
-
-	if difficult_level == 'H':
-		del HANGMAN[1]
-		del HANGMAN[2]
-		del HANGMAN[3]
-		del HANGMAN[4]
-		del HANGMAN[5]
-
-	return HANGMAN
-
-
-
 print()
 # print('\t\t\t H A N G M A N')
 print()
-# difficult_level = ''
-# while difficult_level not in 'EMH':
-# 	print('Which level do you want to play?\n(Choice: E: Easy, M: Medium, H: Hard)')
-# 	difficult_level = input().upper()
+difficult_level = ' '
+while difficult_level not in 'EMH':
+	print('Which level do you want to play?\n(Choice: E: Easy, M: Medium, H: Hard)')
+	difficult_level = input().upper()
 
-# if difficult_level == 'M':
-# 	del HANGMAN[1]
-# 	del HANGMAN[2]
+if difficult_level == 'M':
+	del HANGMAN[0]
+	del HANGMAN[0]
 
-# if difficult_level == 'H':
-# 	del HANGMAN[1]
-# 	del HANGMAN[2]
-# 	del HANGMAN[3]
-# 	del HANGMAN[4]
-# 	del HANGMAN[5]
+if difficult_level == 'H':
+	del HANGMAN[0]
+	del HANGMAN[0]
+	del HANGMAN[0]
+	del HANGMAN[0]
+
 missed_letters = ''
 correct_letters = ''
 target_word, secret_set = get_word(word_list)
 game_is_done = False
 
 while True:
-	print()
-	print('\t\t\t H A N G M A N')
-	print()
+	print('\n\t\t\t H A N G M A N\n')
 	intro()
-	pick_level()
+	print()
+	# pick_level()
 	print()
 	# for i in HANGMAN:
 	# 	print(i)
@@ -215,7 +185,7 @@ while True:
 			show_board(missed_letters, correct_letters, target_word)
 			print()
 			print(f'Sorry. You have run out of guesses with {len(missed_letters)} incorrect guesses. \
-				and {len(correct_letters)} correct guesses!\nThe target word is: ***{target_word}***\n')
+				and {len(correct_letters)} correct guesses!\n\nThe target word is: ***{target_word}***\n')
 			game_is_done = True
 
 	if game_is_done:

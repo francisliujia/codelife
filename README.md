@@ -1,7 +1,5 @@
 # francisliujia.github.io
 
-[applications]
- -- Games and simple applications I created with Python.
 
 [cs50 projects]
  -- course work 
