@@ -1,4 +1,4 @@
-# francisliujia/Python_developer
+# francisliujia/python_developer
 
 
 [cs50 projects]
