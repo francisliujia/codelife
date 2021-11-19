@@ -10,18 +10,18 @@ def draw_board(board):
 def input_player_letter():
 	letter = ''
 	while not (letter == 'X' or letter == 'O'):
-		print('Do you want to be X or O')
+		print('Do you want to be X or O ?')
 		letter = input().upper()
 
-		if letter == 'X':
-			return ['X', 'O']
-		else:
-			return ['O', 'X']
+	if letter == 'X':
+		return ['X', 'O']
+	else:
+		return ['O', 'X']
 
 def who_goes_first():
 	if random.randint(0,1) == 0:
 		return 'computer'
-	else :
+	else:
 		return 'player'
 
 def make_move(board, letter, move):
@@ -29,13 +29,13 @@ def make_move(board, letter, move):
 
 def is_winner(board, letter):
 	return (
-		(board[4]==board[5]==board[6]==letter) or 
-		(board[1]==board[2]==board[3]==letter) or 
-		(board[7]==board[4]==board[1]==letter) or 
-		(board[8]==board[5]==board[2]==letter) or 
-		(board[9]==board[6]==board[3]==letter) or 
-		(board[7]==board[5]==board[3]==letter) or 
-		(board[9]==board[5]==board[1]==letter))
+		(board[4]==letter and board[5]== letter and board[6]==letter) or 
+		(board[1]==letter and board[2]== letter and board[3]==letter) or 
+		(board[7]==letter and board[4]== letter and board[1]==letter) or 
+		(board[8]==letter and board[5]== letter and board[2]==letter) or 
+		(board[9]==letter and board[6]== letter and board[3]==letter) or 
+		(board[7]==letter and board[5]== letter and board[3]==letter) or 
+		(board[9]==letter and board[5]== letter and board[1]==letter))
 
 
 def get_board_copy(board):
@@ -103,7 +103,7 @@ def is_board_full(board):
 	for i in range(1, 10):
 		if is_space_free(board, i):
 			return False
-		return True
+	return True
 
 
 print('\n\t\t\tTIC TAC TOE\n')
@@ -141,7 +141,7 @@ while True:
 			if is_winner(the_board, computerLetter):
 				draw_board(the_board)
 				print('The computer have beaten you! You lose!')
-
+				game_is_playing = False
 			else:
 				if is_board_full(the_board):
 					draw_board(the_board)
@@ -151,7 +151,7 @@ while True:
 					turn = 'player'
 
 	print('Do you want to play again? (yes/no)')
-	if not input().lower()startswith('y'):
+	if not input().lower().startswith('y'):
 		break
 
 
