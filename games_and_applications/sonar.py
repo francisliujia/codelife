@@ -15,12 +15,12 @@ def get_new_board():
 	return board
 
 def draw_board(board):
-	tens_degits_line = '  '
+	tens_degits_line = '    '
 	for i in range(1, 6):
 		tens_degits_line += (' '*9) + str(i)
 
 	print(tens_degits_line)
-	print('  ' + ('0123456789'*6))
+	print('   ' + ('0123456789'*6))
 	print()
 
 	for row in range(15):
@@ -33,11 +33,12 @@ def draw_board(board):
 		for colum in range(60):
 			board_row += board[colum][row]
 
-		print(f'{extra_space}, {row}, {board_row}, {row}')
+		# print(f'{extra_space}{row}{board_row}{row}')
+		print('%s%s %s %s'% (extra_space, row, board_row, row))
 
 
 	print()
-	print('  ' + ('0123456789'*6))
+	print('   ' + ('0123456789'*6))
 	print(tens_degits_line)
 
 
@@ -51,7 +52,7 @@ def get_random_chest(num_chests):
 
 
 def is_on_board(x, y):
-	return x > 0 and x <= 59 and y > 0 and y <= 14
+	return x >= 0 and x <= 59 and y >= 0 and y <= 14
 
 
 def make_move(board, chests, x, y):
@@ -59,20 +60,21 @@ def make_move(board, chests, x, y):
 
 	for cx, cy in chests:
 		distance = math.sqrt((cx - x) ** 2 + (cy - y) ** 2)
-
 		if distance < smallest_distance:
-			smallest_distance = round(smallest_distance)
+			smallest_distance = distance
 
-		if smallest_distance == 0:
-			chests.remove([x, y])
-			return 'You have found ta sunken treasure chest!'
+	smallest_distance = round(smallest_distance)
+
+	if smallest_distance == 0:
+		chests.remove([x, y])
+		return 'You have found a sunken treasure chest!'
+	else:
+		if smallest_distance < 10:
+			board[x][y] = str(smallest_distance)
+			return f'\nTreasure detected at a distance of *** {smallest_distance} *** from the sonar devce.'
 		else:
-			if smallest_distance < 10:
-				board[x][y] = str(smallest_distance)
-				return f'Treasure detected at a distance of {smallest_distance} from the sonar devce.'
-			else:
-				board[x][y] = 'X'
-				return 'Sonar did not detect anythong. All treasure chests out of range.'
+			board[x][y] = 'X'
+			return '\nSonar did not detect anythong. All treasure chests out of range.'
 
 
 def enter_player_move(previous_moves):
@@ -92,6 +94,14 @@ def enter_player_move(previous_moves):
 			return [int(move[0]), int(move[1])]
 
 		print('Enter a number 0-59, a space, then a number 0-14')
+
+
+def show_chests(the_board, the_chests,previous_moves, x, y):
+	for x, y in the_chests:
+		the_board[x][y] = 'C'
+	for x, y in previous_moves:
+		make_move(the_board, the_chests, x, y)
+	draw_board(the_board)
 
 
 def show_instructions():
@@ -125,8 +135,8 @@ Press enter to continue...
 ''')
 
 	input()
-	print('''
-When you drop a snoar device directly on a chest, you retrieve it and the other
+	print(
+'''When you drop a snoar device directly on a chest, you retrieve it and the other
 sonar devices update to show how far away the neatest chest is. The chests are
 beyond the range of the sonar device on the left, so it shows an X.
 
@@ -145,8 +155,7 @@ The treasure chests don't move around. Sonar devices can detect treasure chests
 up to a distance of 9 spaces. Try to collest all 3 chests before running out of
 sonar devices. Good luck, Captain!
 
-Press enter to continue...
-''')
+Press enter to continue...''')
 	input()
 
 
@@ -164,7 +173,8 @@ while True:
 	previous_moves = []
 
 	while sonar_devices > 0:
-		print(f'You have {sonar_devices} sonar device(s) left, {len(the_chests)} treasure chests remaining.')
+		print()
+		print(f'You have *** {sonar_devices} *** sonar device(s) left, *** {len(the_chests)} *** treasure chests remaining.')
 		x, y = enter_player_move(previous_moves)
 		previous_moves.append([x, y])
 		move_result = make_move(the_board, the_chests, x, y)
@@ -174,11 +184,14 @@ while True:
 			if move_result == 'You have found a sunken treasure chest!':
 				for x, y in previous_moves:
 					make_move(the_board, the_chests, x, y)
-				draw_board(the_board)
-				print(move_result)
+			draw_board(the_board)
+			print(move_result)
 
 		if len(the_chests) == 0:
 			print('You have found all the sunken treasure chests! Well done, Captain!')
+			show_chests(the_board, the_chests, previous_moves, x, y)
+			for x, y in the_chests:
+				print(f'({x},{y})')
 			break
 
 		sonar_devices -= 1
@@ -186,7 +199,8 @@ while True:
 	if sonar_devices == 0:
 		print('We\'ve run out of sonar devices! Now we have to turn the ship around and head')
 		print('for home with treasure chests still out there! Game over.')
-		print('\t\tThe remaining chests locations:')
+		print('\n*** The remaining chests locations: ***')
+		show_chests(the_board, the_chests, previous_moves, x, y)
 		for x, y in the_chests:
 			print(f'({x},{y})')
 
