@@ -189,9 +189,9 @@ while True:
 
 		if len(the_chests) == 0:
 			print('You have found all the sunken treasure chests! Well done, Captain!')
-			show_chests(the_board, the_chests, previous_moves, x, y)
-			for x, y in the_chests:
-				print(f'({x},{y})')
+			# show_chests(the_board, the_chests, previous_moves, x, y)
+			# for x, y in the_chests:
+			# 	print(f'({x},{y})')
 			break
 
 		sonar_devices -= 1
