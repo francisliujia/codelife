@@ -187,53 +187,54 @@ def play_game(player_tile, computer_tile):
 
 		elif turn == 'player':
 			if player_valid_moves != []:
-				if show_hints:
-					valid_move_board = get_board_with_valid_moves(board, player_tile)
-					draw_board(valid_move_board)
-				else:
-					draw_board(board)
-				print_score(board, player_tile, computer_tile)
+				# if show_hints:
+				# 	valid_move_board = get_board_with_valid_moves(board, player_tile)
+				# 	draw_board(valid_move_board)
+				# else:
+				# 	draw_board(board)
+				# print_score(board, player_tile, computer_tile)
 
-				move = get_player_move(board, player_tile)
-				if move == 'q':
-					print('Thanks for playing.')
-					sys.exit()
-				elif move == 'h':
-					show_hints = not show_hints
-					continue
-				else:
-					make_move(board, player_tile, move[0], move[1])
+				move = get_computer_move(board, player_tile)
+				# if move == 'q':
+				# 	print('Thanks for playing.')
+				# 	sys.exit()
+				# elif move == 'h':
+				# 	show_hints = not show_hints
+				# 	continue
+				# else:
+				make_move(board, player_tile, move[0], move[1])
 			turn = 'computer'
 		elif turn == 'computer':
 			if computer_valid_moves != []:
-				draw_board(board)
-				print_score(board, player_tile, computer_tile)
+				# draw_board(board)
+				# print_score(board, player_tile, computer_tile)
 
-				input('Press Enter to see the computer move.')
+				# input('Press Enter to see the computer move.')
 				move = get_computer_move(board, computer_tile)
 				make_move(board, computer_tile, move[0], move[1])
 			turn = 'player'
 
-print('WELCOME TO REVERSEGAM!')
+NUM_GAMES = 250
+Xwins = Owins = Ties = 0
 
-player_tile, computer_tile = enter_player_tile()
+# print('WELCOME TO REVERSEGAM!')
 
-while True:
+player_tile, computer_tile = ['X', 'O']
+
+for i in range(NUM_GAMES):
 	final_board = play_game(player_tile, computer_tile)
-	draw_board(final_board)
 	scores = get_score_of_the_board(final_board)
-	print('X scored %s points. O socred %s points.' %(scores['X'], scores['O']))
+	print('#%s: X scored %s points. O socred %s points.' %(i+1, scores['X'], scores['O']))
 	if scores[player_tile] > scores[computer_tile]:
-		print("You beat the computer by %s points! Congrats!" %(socres[player_tile] - scores[computer_tile]))
+		Xwins += 1
 	elif scores[player_tile] < scores[computer_tile]:
-		print("The computer beat you by %s points!" %(scores[computer_tile] - scores[player_tile]))
+		Owins += 1
 	else:
-		print("The game was a draw!")
+		Ties += 1
 
-	print('Do you want to play again? (yes/no)')
-	if not input().lower().startswith('y'):
-		break
-
+print('X wins: %s (%s%%)' % (Xwins, round(Xwins/ NUM_GAMES *100, 2)))
+print('O wins: %s (%s%%)' % (Owins, round(Owins/ NUM_GAMES *100, 2)))
+print('Ties: %s (%s%%)' % (Ties, round(Ties/ NUM_GAMES *100, 2)))
 
 
 
