@@ -13,6 +13,8 @@ def pasword_dection(password):
 	else:
 		return 'Good password'
 
-pass = 123456677
-
-pasword_dection(pass)
+# pass = 123456677
+nm = '13221gjfffF4132423'
+# pasword_dection('q123151325')
+ret =pasword_dection(nm)
+print(ret)
