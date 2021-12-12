@@ -18,10 +18,10 @@ capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
    'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia',
    'West Virginia': 'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}
 
-cwd = '/Users/ji-axinliu/codelife/python_code/textbooks/automate_the_boring_stuff_with_python'
+# cwd = os.makedirs(os.path.join('./', 'projectQuizFile')) 
 for quizNum in range(35):
-	quizFile = open(os.path.join(cwd, 'projectQuizFile/capitalquiz%s' %(quizNum + 1), 'w'))
-	answerKeyFile = open(os.path.join(cwd, 'projectQuizFile/capitalquiz_answer%s.txt' %(quizNum +1), 'w'))
+	quizFile = open('capitalquiz%s.txt' %(quizNum + 1), 'w')
+	answerKeyFile = open('capitalquiz_answer%s.txt' %(quizNum +1), 'w')
 
 	quizFile.write('Name:\n\nDate:\nPeriod:\n\n')
 	quizFile.write((' ' * 20) + 'state capital quiz (Form %s)' %(quizNum + 1))
