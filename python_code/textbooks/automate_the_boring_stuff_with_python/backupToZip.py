@@ -10,8 +10,7 @@ def backupToZip(folder):
 		if not os.path.exits(zipfile):
 			break
 		number += 1
-
-
+		
 	# 2 create new zip file
 	print('Creating %s ...' % (zipfilename))
 	backupZip = zipfile.ZipFile(zipfilename, 'w')
