@@ -20,7 +20,7 @@ for file in file_list:
 	sheet.cell(row=1, column=column_num).value = file
 	sheet.cell(row=1, column=column_num).value = make_bold
 
-	longest = alien_0
+	longest = 0
 	row_num = 2
 	for line in lines:
 		line = strip()
