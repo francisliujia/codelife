@@ -2,7 +2,7 @@ from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
 import random 
 from math import sqrt 
-from generic_search import dfs, node_to_path, Node 
+from generic_search import dfs, bfs, astar, node_to_path, Node 
 
 class Cell(str):
 	EMPTY = ' '
@@ -34,11 +34,11 @@ class Maze:
 				if random.uniform(0, 1) < sparseness:
 					self._grid[row][column] = Cell.BLOCKED
 
-	def __str__(self):
-		output = ''
-		for row in self._grid:
-			output += ''.join([c.value for c in row]) + '\n'
-		return output
+	# def __str__(self):
+	# 	output = ''
+	# 	for row in self._grid:
+	# 		output += ''.join([c.value for c in row]) + '\n'
+	# 	return output
 
 	def goal_test(self, m1):
 		return m1 == self.goal 
@@ -71,6 +71,8 @@ class Maze:
 if __name__ == '__main__':
 	m = Maze()
 	print(m)
+
+	# ------ solution 1 ---------
 	solution1 = dfs(m.start, m.goal_test, m.successors)
 	if solution1 is None:
 		print('no solution found using depth-first search')
@@ -79,6 +81,27 @@ if __name__ == '__main__':
 		m.mark(path1)
 		print(m)
 		m.clear(path1)
+
+
+	# ------ solution 2 ---------
+	solution2 = bfs(m.start, m.goal_test, m.successors)
+	if solution2 is None:
+		print('no solution found using breadth-first search')
+	else:
+		path2 = node_to_path(solution2)
+		m.mark(path2)
+		print(m)
+		m.clear(path2)
+
+	# ------ solution 3 ---------
+	solution3 = astar(m.start, m.goal_test, m.successors)
+	if solution3 is None:
+		print('no solution found using A*!')
+	else:
+		path3 = node_to_path(solution3)
+		m.mark(path3)
+		print(m)
+		m.clear(path3)
 
 
 
