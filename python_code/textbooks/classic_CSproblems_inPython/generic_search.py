@@ -1,5 +1,5 @@
 from __future__ import annotations 
-from typing import TypeVar, Generic, Deque
+from typing import TypeVar, Iterable, Sequence, List, Callable, Set, Dict, Any, Optional, Generic, Deque
 from typing import Protocol
 from heapq import heappush, heappop
 from math import sqrt
@@ -94,7 +94,7 @@ class Queue(Generic[T]):
 	def empty(self):
 		return not self._container
 
-	def push(self, item):
+	def push(self, item: T):
 		self._container.append(item)
 
 	def pop(self):
@@ -104,14 +104,14 @@ class Queue(Generic[T]):
 		return repr(self._container)
 
 
-def bfs(initial, goal_test, successors):
-	frontier = Queue()
+def bfs(initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], List[T]]):
+	frontier: Queue[Node[T]] = Queue()
 	frontier.push(Node(initial, None))
-	explored = {initial}
+	explored: Set[T] = {initial}
 
 	while not frontier.empty:
-		current_node = frontier.pop()
-		current_state: Node[T] = current_node.state
+		current_node: Node[T] = frontier.pop()
+		current_state: T = current_node.state
 		if goal_test(current_state):
 			return current_node
 		for child in successors(current_state):
@@ -159,18 +159,18 @@ def astar(initial, goal_test, successors, heuristic):
 
 
 class Node(Generic[T]):
-	def __init__(self, state, parent, cost=0.0, heuristic=0.0):
-		self.state = state 
-		self.parent = parent
-		self.cost = cost 
-		self.heuristic = heuristic
+	def __init__(self, state: T, parent: Optional[Node], cost: float =0.0, heuristic: float = 0.0):
+		self.state: T = state 
+		self.parent: Optional[Node] = parent
+		self.cost: float = cost 
+		self.heuristic: float = heuristic
 
-	def __lt__(self, other):
+	def __lt__(self, other: Node):
 		return (self.cost + self.heuristic) < (other.cost + other.heuristic)
 
 
-def node_to_path(node):
-	path = [node.state]
+def node_to_path(node: Node[T]):
+	path: List[T] = [node.state]
 	while node.parent is not None:
 		node = node.parent
 		path.append(node.state)

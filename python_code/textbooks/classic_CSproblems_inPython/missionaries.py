@@ -56,7 +56,7 @@ class MC_State:
 				sucs.append(MC_State(self.wm + 1, self.wc + 1, not self.boat))
 		return [x for x in sucs if x.is_legal]
 
-def display_solution(path):
+def display_solution(path: List[MC_State]):
 	if len(path) == 0:
 		return  
 	old_state = path[0]
@@ -71,11 +71,11 @@ def display_solution(path):
 
 if __name__ == "__main__":
 	start = MC_State(MAX_NUM, MAX_NUM, True)
-	solution = bfs(start, MC_State.goal_test, MC_State.successors)
+	solution: Optional[Node[MC_State]] = bfs(start, MC_State.goal_test, MC_State.successors)
 	if  solution is None:
 		print("no solution found")
 	else:
-		path = node_to_path(solution)
+		path: List[MC_State] = node_to_path(solution)
 		display_solution(path)
 
 

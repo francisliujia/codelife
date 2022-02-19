@@ -18,12 +18,12 @@ class MazeLocation(NamedTuple):
 
 class Maze:
 
-	def __init__(self, rows=10, columns=10, sparseness=0.2, start=MazeLocation(0, 0), goal=MazeLocation(9, 9)):
+	def __init__(self, rows=10, columns=10, sparseness=0.2, start: MazeLocation = MazeLocation(0, 0), goal: MazeLocation = MazeLocation(9, 9)):
 		self._rows = rows 
 		self._columns = columns
 		self.start = start
 		self.goal = goal
-		self._grid = [[Cell.EMPTY for c in range(columns)] for r in range(rows)]
+		self._grid: List[List[Cell]] = [[Cell.EMPTY for c in range(columns)] for r in range(rows)]
 		self._randomly_fill(rows, columns, sparseness)
 		self._grid[start.row][start.column] = Cell.START
 		self._grid[goal.row][goal.column] = Cell.GOAL
@@ -31,16 +31,16 @@ class Maze:
 	def _randomly_fill(self, rows, columns, sparseness):
 		for row in range(rows):
 			for column in range(columns):
-				if random.uniform(0, 1) < sparseness:
+				if random.uniform(0, 1.0) < sparseness:
 					self._grid[row][column] = Cell.BLOCKED
 
-	# def __str__(self):
-	# 	output = ''
-	# 	for row in self._grid:
-	# 		output += ''.join([c.value for c in row]) + '\n'
-	# 	return output
+	def __str__(self):
+		output: str = ""
+		for row in self._grid:
+			output += ''.join([c.value for c in row]) + '\n'
+		return output
 
-	def goal_test(self, m1):
+	def goal_test(self, m1: MazeLocation):
 		return m1 == self.goal 
 
 	def successors(self, m1):
@@ -66,6 +66,21 @@ class Maze:
 			self._grid[maze_location.row][maze_location.column] = Cell.EMPTY
 			self._grid[self.start.row][self.start.column] = Cell.START
 			self._grid[self.goal.row][self.goal.column] = Cell.GOAL
+
+def euclidean_distance(goal):
+	def distance(m1):
+		xdist = m1.column - goal.column 
+		ydist = m1.row - goal.row 
+		return sqrt((xdist * xdist) + (ydist * ydist))
+	return distance
+
+
+def manhattan_distance(goal):
+	def distance(m1):
+		xdist = abs(m1.column - goal.column)
+		ydist = abs(m1.row - goal.row)
+		return xdist + ydist
+	return distance
 
 
 if __name__ == '__main__':
@@ -94,7 +109,8 @@ if __name__ == '__main__':
 		m.clear(path2)
 
 	# ------ solution 3 ---------
-	solution3 = astar(m.start, m.goal_test, m.successors)
+	distance: Callable[[MazeLocation], float] = manhattan_distance(m.goal)
+	solution3: Optional[Node[MazeLocation]] = astar(m.start, m.goal_test, m.successors, distance)
 	if solution3 is None:
 		print('no solution found using A*!')
 	else:
@@ -102,20 +118,6 @@ if __name__ == '__main__':
 		m.mark(path3)
 		print(m)
 		m.clear(path3)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
