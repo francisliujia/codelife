@@ -11,6 +11,10 @@ class Queue:
 		self.queue.appendleft(val)
 	
 	def pop(self):
+		if len(self.queue) == 0:
+			print('empty queue')
+			return
+
 		return self.queue.pop()
 
 	def is_empty(self):
@@ -19,8 +23,13 @@ class Queue:
 	def size(self):
 		return len(self.queue)
 
-queue = Queue()
-queue.push(1)
-queue.push(2)
-queue.push(3)
-print(queue.queue)
+	def front(self):
+		return self.queue[-1]
+
+if __name__ == "__main__":
+	
+	queue = Queue()
+	queue.push(1)
+	queue.push(2)
+	queue.push(3)
+	print(queue.queue)
