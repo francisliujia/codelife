@@ -1,0 +1,50 @@
+Tree:
+	general Tree:
+	binary Tree:
+		binary search tree: with specific order
+
+
+B TREE
+	- every node has at most two child nodes
+	- Binary search tree OR BST
+
+
+BST:
+	- left value is less than the node
+	- right value is greater than the node
+
+	- search: O(log n)
+
+	- breadth first seasrch
+	 
+	- depth first search
+	 	- in order traversal: left sub tree -> root node -> right sub tree
+	 	- pre order traversal: root node -> left sub tree -> right sub tree
+	 	- post order traversal: left sub tree -> right sub tree -> root node
+
+
+	- delete BST
+
+		- delete node with no child
+		- delete node with one child
+		- delete node with two children
+
+			- solution 1 (guarteen all right elements are greater than node)
+			- copy minimum from right subtree
+			- delete duplicate node from right sub tree
+
+
+			- solution 2 (guarteen all left elements are less than node)
+			- find max from left subtree
+			- remove duplicate node 
+
+
+
+
+
+
+
+
+
+
+
