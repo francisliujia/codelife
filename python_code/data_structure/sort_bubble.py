@@ -16,27 +16,6 @@ def bubble_sort(elements):
 			break
 
 
-def bubble_sort_dict(elements, key=None):
-	size = len(elements)
-
-	for i in range(size - 1):
-		swapped = False
-		for j in range(size - 1 - i):
-			a = elements[j][key]
-			b = elements[j + 1][key]
-			if a > b:
-				temp = elements[j]
-				elements[j] = elements[j+1]
-				elements[j+1] = temp
-				swapped = True
-		if not swapped:
-			break
-
-
-
-
-
-
 if __name__ == '__main__':
 	# elements = [1,4,3,5,8, 90, 45,23,44]
 	# s_elements = ['Lincoln', 'Abraham', 'lee', 'francis', ]
